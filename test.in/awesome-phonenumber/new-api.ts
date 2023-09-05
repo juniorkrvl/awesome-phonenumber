@@ -152,6 +152,17 @@ describe( 'general', ( ) =>
 
 		expect( regionCodes.length ).toBe( new Set( regionCodes ).size );
 	} );
+
+	it( 'should support new HK numbers starting with 4 and 5', ( ) =>
+	{
+		const pn = parsePhoneNumber( '+852 46878876', { regionCode: 'HK' } );
+		expect( pn.valid ).toBe( true );
+		if ( pn.valid !== true ) return;
+		expect( pn.possible ).toBe( true );
+		expect( pn.typeIsMobile ).toBe( true );
+		expect( pn.number.significant ).toBe( '46878876' );
+		expect( pn.canBeInternationallyDialled ).toBe( true );
+	} );
 } );
 
 
